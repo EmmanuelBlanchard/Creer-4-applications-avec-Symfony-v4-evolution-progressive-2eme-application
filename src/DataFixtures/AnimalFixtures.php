@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Animal;
+use App\Entity\Famille;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,12 +11,26 @@ class AnimalFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $c1 = new Famille();
+        $c1->setLibelle("mammifères")
+            ->setDescription("Animaux vertébrés nourissant leurs petits avec du lait");
+        $manager->persist($c1);
+        $c2 = new Famille();
+        $c2->setLibelle("reptiles")
+            ->setDescription("Animaux vertébrés qui rampent");
+        $manager->persist($c2);
+        $c3 = new Famille();
+        $c3->setLibelle("poissons")
+            ->setDescription("Animaux invertébrés du monde aquatique");
+        $manager->persist($c3);
+
         $a1 = new Animal();
         $a1->setNom("Chien")
             ->setDescription("Un animal domestique")
             ->setImage("chien.png")
             ->setPoids(10)
             ->setDangereux(false)
+            ->setFamille($c1)
         ;
         $manager->persist($a1);
 
@@ -25,6 +40,7 @@ class AnimalFixtures extends Fixture
             ->setImage("cochon.png")
             ->setPoids(300)
             ->setDangereux(false)
+            ->setFamille($c1)
         ;
         $manager->persist($a2);
 
@@ -34,6 +50,7 @@ class AnimalFixtures extends Fixture
             ->setImage("serpent.png")
             ->setPoids(5)
             ->setDangereux(true)
+            ->setFamille($c2)
         ;
         $manager->persist($a3);
 
@@ -43,6 +60,7 @@ class AnimalFixtures extends Fixture
             ->setImage("croco.png")
             ->setPoids(500)
             ->setDangereux(true)
+            ->setFamille($c2)
         ;
         $manager->persist($a4);
 
@@ -52,6 +70,7 @@ class AnimalFixtures extends Fixture
             ->setImage("requin.png")
             ->setPoids(800)
             ->setDangereux(true)
+            ->setFamille($c3)
         ;
         $manager->persist($a5);
 
