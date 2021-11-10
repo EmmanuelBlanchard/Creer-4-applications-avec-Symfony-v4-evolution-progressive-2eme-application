@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Continent;
 use App\Repository\ContinentRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,4 +20,15 @@ class ContinentController extends AbstractController
             'continents' => $continents
         ]);
     }
+
+    /**
+     * @Route("/continent/{id}", name="afficher_continent")
+     */
+    public function afficherContinent(Continent $continent)
+    {
+        return $this->render('continent/afficherContinent.html.twig',[
+            "continent" => $continent
+        ]);
+    }
+    
 }
